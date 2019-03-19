@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <nav th:replace="/fragments/head::head"></nav>
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav th:replace="/fragments/navbar :: navbar"></nav>
+    </header>
+
+    <main>
+        <div class="container mt-4">
+            <h1>All Viruses</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Magnitude</th>
+                    <th scope="col">Released On</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody id="j_id_p:tbody_element">
+                <th:block th:each="virus, iter: ${viruses}" th:object="${virus}">
+                    <tr>
+                        <td scope="row" th:text="|${iter.index + 1}|"></td>
+                        <td th:text="${virus.name}"></td>
+                        <td th:text="${virus.magnitude}"></td>
+                        <td th:text="${virus.releasedOn}"></td>
+                        <td><a class="btn btn-light" th:href="@{/viruses/edit/{id}(id=${virus.id})}">Edit</a></td>
+                        <td><a class="btn btn-light" th:href="@{/viruses/delete/{id}(id=${virus.id})}">Delete</a></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div th:replace="/fragments/footer :: footer"></div>
+    </footer>
+</div>
+</body>
+</html>
