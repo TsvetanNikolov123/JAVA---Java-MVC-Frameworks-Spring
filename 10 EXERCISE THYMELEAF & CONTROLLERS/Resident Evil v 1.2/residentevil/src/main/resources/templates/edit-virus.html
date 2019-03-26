@@ -125,7 +125,7 @@
                 <div class="form-group" th:classappend="${#fields.hasErrors('releasedOn')} ? 'text-danger'">
                     <label for="inputVirusReleaseDate">Release Date</label>
                     <input type="date" class="form-control" id="inputVirusReleaseDate"
-                           th:field="*{releasedOn}" disabled>
+                           th:field="*{releasedOn}" readonly>
                     <small th:each="error : ${#fields.errors('releasedOn')}" th:text="${error}"></small>
                 </div>
 
