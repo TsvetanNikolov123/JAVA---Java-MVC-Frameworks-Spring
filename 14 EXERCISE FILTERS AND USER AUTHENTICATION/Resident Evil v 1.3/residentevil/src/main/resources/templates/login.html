@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <nav th:replace="/fragments/head::head"></nav>
+</head>
+<body>
+<div class="container-fluid">
+    <header>
+        <nav th:replace="/fragments/navbar :: navbar"></nav>
+    </header>
+    <main>
+        <div class="jumbotron re-background text-light">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" name="username" class="form-control" id="inputUsername"
+                           placeholder="Username">
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" name="password" class="form-control" id="inputPassword"
+                               placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <div th:replace="/fragments/footer :: footer"></div>
+    </footer>
+</div>
+</body>
+</html>

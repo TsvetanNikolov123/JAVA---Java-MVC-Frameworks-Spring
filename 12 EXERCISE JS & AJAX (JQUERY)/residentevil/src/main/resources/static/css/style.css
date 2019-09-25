@@ -1,0 +1,12 @@
+.re-background {
+    background-color: #900C45;
+    color: white;
+}
+
+.re-footer {
+    width: 99%;
+    /*height: 40px;*/
+    position: absolute;
+    bottom: 15px;
+}
+
