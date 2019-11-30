@@ -2,6 +2,8 @@ package softuni.heroes.web.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,7 @@ import softuni.heroes.services.services.AuthService;
 import softuni.heroes.web.models.RegisterUserModel;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
@@ -31,22 +34,24 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String getRegisterForm() {
+    public String getRegisterForm(Model model) {
+        model.addAttribute("model", new RegisterUserModel());
         return "auth/register.html";
     }
 
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute RegisterUserModel model) {
-        RegisterUserServiceModel serviceModel = modelMapper.map(model, RegisterUserServiceModel.class);
+    public String register(@Valid  @ModelAttribute RegisterUserModel model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "auth/register.html";
+        }
 
+        RegisterUserServiceModel serviceModel = modelMapper.map(model, RegisterUserServiceModel.class);
         authService.register(serviceModel);
         return "redirect:/";
     }
 
     @PostMapping("/login")
     public String login(@ModelAttribute RegisterUserModel model, HttpSession httpSession) {
-        // todo perhaps to made LoginUserServiceModel and use it instead RegisterUserServiceModel for login
-
         RegisterUserServiceModel serviceModel = modelMapper.map(model, RegisterUserServiceModel.class);
         try {
             LoginUserServiceModel loginUserServiceModel = authService.login(serviceModel);

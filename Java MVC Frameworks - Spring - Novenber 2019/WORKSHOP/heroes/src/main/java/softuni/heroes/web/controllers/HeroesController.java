@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import softuni.heroes.errors.HeroNotFoundException;
 import softuni.heroes.services.models.HeroCreateServiceModel;
 import softuni.heroes.services.models.HeroDetailsServiceModel;
 import softuni.heroes.services.models.LoginUserServiceModel;
@@ -38,33 +39,37 @@ public class HeroesController extends BaseController {
     }
 
     @GetMapping("/create")
-    public String getCreateHeroForm (HttpSession session) {
-        if (!isAuthenticated(session)){
+    public String getCreateHeroForm(HttpSession session) {
+        if (!isAuthenticated(session)) {
             return "redirect:/users/login";
         }
         return "heroes/create-hero.html";
     }
 
     @PostMapping("/create")
-    public String createHero(@ModelAttribute HeroCreateModel hero, HttpSession session){
-        if (!isAuthenticated(session)){
+    public String createHero(@ModelAttribute HeroCreateModel hero, HttpSession session) {
+        if (!isAuthenticated(session)) {
             return "/";
         }
 
         String username = getUsername(session);
 
         HeroCreateServiceModel serviceModel = modelMapper.map(hero, HeroCreateServiceModel.class);
-        try{
+        try {
             usersService.createHeroForUser(username, serviceModel);
             LoginUserServiceModel loginUserServiceModel = new LoginUserServiceModel(username, hero.getName());
             session.setAttribute("user", loginUserServiceModel);
             return "redirect:/heroes/details/" + hero.getName();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             return "redirect:/heroes/create";
         }
+    }
 
-//        HeroCreateServiceModel serviceModel = modelMapper.map(hero, HeroCreateServiceModel.class);
-//        usersService.createHeroForUser(username, serviceModel);
-//        return "redirect:/heroes/details/" + hero.getName();
+    @ExceptionHandler(HeroNotFoundException.class)
+    public ModelAndView handleException(HeroNotFoundException exception) {
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("message", exception.getMessage());
+
+        return modelAndView;
     }
 }

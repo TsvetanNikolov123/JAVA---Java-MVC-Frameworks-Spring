@@ -6,6 +6,7 @@ import softuni.heroes.data.models.Hero;
 import softuni.heroes.data.models.Item;
 import softuni.heroes.data.models.enums.Slot;
 import softuni.heroes.data.repositories.HeroesRepository;
+import softuni.heroes.errors.HeroNotFoundException;
 import softuni.heroes.services.factories.HeroesFactory;
 import softuni.heroes.services.models.HeroCreateServiceModel;
 import softuni.heroes.services.models.HeroDetailsServiceModel;
@@ -30,12 +31,7 @@ public class HeroesServiceImpl implements HeroesService {
 
     @Override
     public HeroDetailsServiceModel getByName(String name) {
-        Optional<Hero> heroOptional = heroesRepository.getByNameIgnoreCase(name);
-        if (heroOptional.isEmpty()) {
-            throw new NullPointerException("No such hero");
-        }
-
-        Hero hero = heroOptional.get();
+        Hero hero = heroesRepository.getByNameIgnoreCase(name).orElseThrow(() -> new HeroNotFoundException("There is no such hero !!!"));
 
         HeroDetailsServiceModel serviceModel = modelMapper.map(hero, HeroDetailsServiceModel.class);
 

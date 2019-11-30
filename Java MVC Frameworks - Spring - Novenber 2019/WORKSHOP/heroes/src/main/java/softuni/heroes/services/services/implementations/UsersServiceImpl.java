@@ -18,7 +18,11 @@ public class UsersServiceImpl implements UsersService {
     private final HeroesRepository heroesRepository;
     private final ModelMapper modelMapper;
 
-    public UsersServiceImpl(HeroesService heroesService, UsersRepository usersRepository, HeroesRepository heroesRepository, ModelMapper modelMapper) {
+    public UsersServiceImpl(
+            HeroesService heroesService,
+            UsersRepository usersRepository,
+            HeroesRepository heroesRepository,
+            ModelMapper modelMapper) {
         this.heroesService = heroesService;
         this.usersRepository = usersRepository;
         this.heroesRepository = heroesRepository;
@@ -31,6 +35,6 @@ public class UsersServiceImpl implements UsersService {
         Hero hero = heroesService.create(heroServiceModel);
 
         hero.setUser(user);
-        heroesRepository.save(hero);
+        heroesRepository.saveAndFlush(hero);
     }
 }
