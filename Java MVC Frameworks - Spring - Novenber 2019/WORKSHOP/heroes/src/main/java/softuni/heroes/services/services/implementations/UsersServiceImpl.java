@@ -30,11 +30,15 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public void createHeroForUser(String username, HeroCreateServiceModel heroServiceModel) {
+    public void createHeroForUser(String username, HeroCreateServiceModel heroServiceModel) throws Exception {
         User user = usersRepository.findByUsername(username);
-        Hero hero = heroesService.create(heroServiceModel);
+        if (user.getHero() != null) {
+            throw new Exception("User already has a hero");
+        }
 
-        hero.setUser(user);
-        heroesRepository.saveAndFlush(hero);
+        Hero hero = heroesService.create(heroServiceModel);
+        user.setHero(hero);
+
+        usersRepository.saveAndFlush(user);
     }
 }
