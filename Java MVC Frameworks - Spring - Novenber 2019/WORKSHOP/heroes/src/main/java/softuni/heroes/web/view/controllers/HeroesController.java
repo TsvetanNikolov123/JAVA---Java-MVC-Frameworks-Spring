@@ -1,4 +1,4 @@
-package softuni.heroes.web.controllers;
+package softuni.heroes.web.view.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -10,9 +10,9 @@ import softuni.heroes.services.models.HeroDetailsServiceModel;
 import softuni.heroes.services.models.LoginUserServiceModel;
 import softuni.heroes.services.services.HeroesService;
 import softuni.heroes.services.services.UsersService;
-import softuni.heroes.web.controllers.base.BaseController;
-import softuni.heroes.web.models.HeroCreateModel;
-import softuni.heroes.web.models.HeroDetailsViewModel;
+import softuni.heroes.web.base.BaseController;
+import softuni.heroes.web.view.models.HeroCreateModel;
+import softuni.heroes.web.view.models.HeroDetailsViewModel;
 
 import javax.servlet.http.HttpSession;
 

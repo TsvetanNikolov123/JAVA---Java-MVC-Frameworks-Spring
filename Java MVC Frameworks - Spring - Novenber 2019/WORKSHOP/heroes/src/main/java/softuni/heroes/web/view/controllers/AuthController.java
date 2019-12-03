@@ -1,4 +1,4 @@
-package softuni.heroes.web.controllers;
+package softuni.heroes.web.view.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import softuni.heroes.services.models.LoginUserServiceModel;
 import softuni.heroes.services.models.auth.RegisterUserServiceModel;
 import softuni.heroes.services.services.AuthService;
-import softuni.heroes.web.models.RegisterUserModel;
+import softuni.heroes.web.view.models.RegisterUserModel;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;

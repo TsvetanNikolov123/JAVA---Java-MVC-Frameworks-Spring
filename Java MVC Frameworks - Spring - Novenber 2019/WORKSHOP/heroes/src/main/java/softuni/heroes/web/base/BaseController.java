@@ -1,4 +1,4 @@
-package softuni.heroes.web.controllers.base;
+package softuni.heroes.web.base;
 
 import softuni.heroes.services.models.LoginUserServiceModel;
 

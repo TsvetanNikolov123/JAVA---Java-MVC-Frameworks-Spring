@@ -1,4 +1,4 @@
-package softuni.heroes.web.models;
+package softuni.heroes.web.view.models;
 
 import ch.qos.logback.core.joran.spi.NoAutoStart;
 import lombok.Getter;
