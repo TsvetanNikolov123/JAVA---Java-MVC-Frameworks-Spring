@@ -33,6 +33,6 @@ public class ItemsApiController extends BaseController {
     @PostMapping("/api/items/{id}")
     public void buyItem(@PathVariable long id, HttpSession session) {
         String username = getUsername(session);
-        // todo write me
+        itemsService.createForUserId(id, username);
     }
 }

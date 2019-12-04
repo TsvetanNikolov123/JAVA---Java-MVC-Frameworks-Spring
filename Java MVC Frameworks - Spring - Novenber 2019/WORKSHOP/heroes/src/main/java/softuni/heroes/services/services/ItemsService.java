@@ -7,4 +7,6 @@ import java.util.List;
 public interface ItemsService {
 
     List<ItemServiceModel> getItemsForUser(String username);
+
+    void createForUserId(long id, String username);
 }
