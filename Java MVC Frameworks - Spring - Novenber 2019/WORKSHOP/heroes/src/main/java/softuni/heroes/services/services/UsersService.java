@@ -1,6 +1,6 @@
 package softuni.heroes.services.services;
 
-import softuni.heroes.services.models.HeroCreateServiceModel;
+import softuni.heroes.services.models.heroes.HeroCreateServiceModel;
 
 public interface UsersService {
 

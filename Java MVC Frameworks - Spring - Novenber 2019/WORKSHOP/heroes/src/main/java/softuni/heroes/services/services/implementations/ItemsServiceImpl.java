@@ -7,7 +7,8 @@ import softuni.heroes.data.models.Hero;
 import softuni.heroes.data.models.Item;
 import softuni.heroes.data.repositories.HeroesRepository;
 import softuni.heroes.data.repositories.ItemsRepository;
-import softuni.heroes.services.models.ItemServiceModel;
+import softuni.heroes.services.models.items.ItemCreateServiceModel;
+import softuni.heroes.services.models.items.ItemServiceModel;
 import softuni.heroes.services.services.ItemsService;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class ItemsServiceImpl implements ItemsService {
     }
 
     @Override
-    public void createForUserId(long id, String username) {
+    public void addToUserById(long id, String username) {
         Optional<Hero> heroResult = heroesRepository.getByUserUsername(username);
         if (heroResult.isEmpty()){
             throw new NullPointerException("User does not have a hero");
@@ -61,5 +62,11 @@ public class ItemsServiceImpl implements ItemsService {
         hero.getItems().add(item);
 
         heroesRepository.saveAndFlush(hero);
+    }
+
+    @Override
+    public void create(ItemCreateServiceModel serviceModel) {
+        Item item = modelMapper.map(serviceModel, Item.class);
+        itemsRepository.save(item);
     }
 }

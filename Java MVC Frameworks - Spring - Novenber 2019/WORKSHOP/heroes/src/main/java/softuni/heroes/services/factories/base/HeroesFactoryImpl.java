@@ -5,6 +5,8 @@ import softuni.heroes.data.models.Hero;
 import softuni.heroes.data.models.enums.Gender;
 import softuni.heroes.services.factories.HeroesFactory;
 
+import static softuni.heroes.services.factories.HeroesConstants.*;
+
 @Factory
 public class HeroesFactoryImpl implements HeroesFactory {
     @Override
@@ -12,11 +14,12 @@ public class HeroesFactoryImpl implements HeroesFactory {
         Hero hero = new Hero();
         hero.setName(name);
         hero.setGender(gender);
-        hero.setAttack(1);
-        hero.setDefence(1);
-        hero.setLevel(1);
-        hero.setStamina(1);
-        hero.setStrength(1);
+        hero.setAttack(INITIAL_ATTACK);
+        hero.setDefence(INITIAL_DEFENCE);
+        hero.setLevel(INITIAL_LEVEL);
+        hero.setStamina(INITIAL_STAMINA);
+        hero.setStrength(INITIAL_STRENGTH);
+
         return hero;
     }
 }

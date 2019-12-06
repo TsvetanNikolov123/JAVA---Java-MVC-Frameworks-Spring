@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import softuni.heroes.data.models.enums.Gender;
-import softuni.heroes.services.models.HeroCreateServiceModel;
+import softuni.heroes.services.models.heroes.HeroCreateServiceModel;
 import softuni.heroes.web.view.models.HeroCreateModel;
 
 @Configuration

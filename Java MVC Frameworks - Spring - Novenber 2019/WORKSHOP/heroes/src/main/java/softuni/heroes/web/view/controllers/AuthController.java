@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import softuni.heroes.services.models.LoginUserServiceModel;
+import softuni.heroes.services.models.auth.LoginUserServiceModel;
 import softuni.heroes.services.models.auth.RegisterUserServiceModel;
 import softuni.heroes.services.services.AuthService;
 import softuni.heroes.web.view.models.RegisterUserModel;

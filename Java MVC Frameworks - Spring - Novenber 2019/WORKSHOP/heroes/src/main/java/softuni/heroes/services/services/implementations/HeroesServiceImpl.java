@@ -1,5 +1,6 @@
 package softuni.heroes.services.services.implementations;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.heroes.data.models.Hero;
@@ -8,30 +9,30 @@ import softuni.heroes.data.models.enums.Slot;
 import softuni.heroes.data.repositories.HeroesRepository;
 import softuni.heroes.errors.HeroNotFoundException;
 import softuni.heroes.services.factories.HeroesFactory;
-import softuni.heroes.services.models.HeroCreateServiceModel;
-import softuni.heroes.services.models.HeroDetailsServiceModel;
-import softuni.heroes.services.models.HeroItemServiceModel;
+import softuni.heroes.services.models.heroes.HeroCreateServiceModel;
+import softuni.heroes.services.models.heroes.HeroDetailsServiceModel;
+import softuni.heroes.services.models.heroes.HeroItemServiceModel;
 import softuni.heroes.services.services.HeroesService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class HeroesServiceImpl implements HeroesService {
 
     private final HeroesRepository heroesRepository;
     private final HeroesFactory heroesFactory;
     private final ModelMapper modelMapper;
 
-    public HeroesServiceImpl(HeroesRepository heroesRepository, HeroesFactory heroesFactory, ModelMapper modelMapper) {
-        this.heroesRepository = heroesRepository;
-        this.heroesFactory = heroesFactory;
-        this.modelMapper = modelMapper;
-    }
-
     @Override
     public HeroDetailsServiceModel getByName(String name) {
-        Hero hero = heroesRepository.getByNameIgnoreCase(name).orElseThrow(() -> new HeroNotFoundException("There is no such hero !!!"));
+        Optional<Hero> heroResult = heroesRepository.getByNameIgnoreCase(name);
+        if(heroResult.isEmpty()) {
+            throw new HeroNotFoundException("Hero with such name does not exist");
+        }
+
+        Hero hero = heroResult.get();
 
         HeroDetailsServiceModel serviceModel = modelMapper.map(hero, HeroDetailsServiceModel.class);
 

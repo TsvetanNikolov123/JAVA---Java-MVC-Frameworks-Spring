@@ -11,7 +11,7 @@ import softuni.heroes.data.repositories.HeroesRepository;
 import softuni.heroes.data.repositories.UsersRepository;
 import softuni.heroes.services.factories.HeroesFactory;
 import softuni.heroes.services.factories.base.HeroesFactoryImpl;
-import softuni.heroes.services.models.HeroCreateServiceModel;
+import softuni.heroes.services.models.heroes.HeroCreateServiceModel;
 import softuni.heroes.services.services.HeroesService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

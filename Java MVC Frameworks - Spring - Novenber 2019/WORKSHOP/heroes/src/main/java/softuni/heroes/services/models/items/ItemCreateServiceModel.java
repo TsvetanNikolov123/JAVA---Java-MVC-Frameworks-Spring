@@ -1,4 +1,4 @@
-package softuni.heroes.services.models;
+package softuni.heroes.services.models.items;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,14 +10,11 @@ import softuni.heroes.data.models.enums.Slot;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemServiceModel {
-
-    private long id;
+public class ItemCreateServiceModel {
     private String name;
+    private Slot slot;
     private int stamina;
     private int strength;
     private int attack;
     private int defence;
-    private Slot slot;
-    private boolean isOwned;
 }

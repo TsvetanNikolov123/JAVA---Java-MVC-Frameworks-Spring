@@ -11,7 +11,7 @@ import softuni.heroes.data.models.User;
 import softuni.heroes.data.models.enums.Slot;
 import softuni.heroes.data.repositories.HeroesRepository;
 import softuni.heroes.data.repositories.ItemsRepository;
-import softuni.heroes.services.models.ItemServiceModel;
+import softuni.heroes.services.models.items.ItemServiceModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ class ItemsServiceImplTest {
 
         assertThrows(
                 NullPointerException.class,
-                () -> service.createForUserId(1, username));
+                () -> service.addToUserById(1, username));
     }
 
     @Test
@@ -120,7 +120,7 @@ class ItemsServiceImplTest {
 
         assertThrows(
                 NullPointerException.class,
-                () -> service.createForUserId(items.get(0).getId(), username));
+                () -> service.addToUserById(items.get(0).getId(), username));
     }
 
     @Test
@@ -138,7 +138,7 @@ class ItemsServiceImplTest {
         Mockito.when(itemsRepository.findById(1L))
                 .thenReturn(Optional.of(items.get(0)));
 
-        service.createForUserId(items.get(0).getId(), username);
+        service.addToUserById(items.get(0).getId(), username);
 
         ArgumentCaptor<Hero> argument = ArgumentCaptor.forClass(Hero.class);
         Mockito.verify(heroesRepository).saveAndFlush(argument.capture());

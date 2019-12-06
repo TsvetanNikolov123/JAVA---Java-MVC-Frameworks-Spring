@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import softuni.heroes.data.models.User;
 import softuni.heroes.data.repositories.UsersRepository;
-import softuni.heroes.services.models.LoginUserServiceModel;
+import softuni.heroes.services.models.auth.LoginUserServiceModel;
 import softuni.heroes.services.models.auth.RegisterUserServiceModel;
 import softuni.heroes.services.services.AuthService;
 import softuni.heroes.services.services.AuthValidationService;

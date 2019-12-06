@@ -1,6 +1,6 @@
 package softuni.heroes.web.base;
 
-import softuni.heroes.services.models.LoginUserServiceModel;
+import softuni.heroes.services.models.auth.LoginUserServiceModel;
 
 import javax.servlet.http.HttpSession;
 

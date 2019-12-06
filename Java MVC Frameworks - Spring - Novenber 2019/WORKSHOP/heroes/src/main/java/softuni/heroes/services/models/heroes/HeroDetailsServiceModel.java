@@ -1,4 +1,4 @@
-package softuni.heroes.services.models;
+package softuni.heroes.services.models.heroes;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

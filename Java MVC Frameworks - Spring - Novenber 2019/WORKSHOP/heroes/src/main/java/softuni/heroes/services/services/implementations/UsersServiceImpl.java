@@ -6,7 +6,7 @@ import softuni.heroes.data.models.Hero;
 import softuni.heroes.data.models.User;
 import softuni.heroes.data.repositories.HeroesRepository;
 import softuni.heroes.data.repositories.UsersRepository;
-import softuni.heroes.services.models.HeroCreateServiceModel;
+import softuni.heroes.services.models.heroes.HeroCreateServiceModel;
 import softuni.heroes.services.services.HeroesService;
 import softuni.heroes.services.services.UsersService;
 

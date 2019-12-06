@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import softuni.heroes.services.models.items.ItemCreateServiceModel;
 import softuni.heroes.services.services.ItemsService;
+import softuni.heroes.web.api.models.ItemCreateRequestModel;
 import softuni.heroes.web.api.models.ItemResponseModel;
 import softuni.heroes.web.base.BaseController;
 
@@ -30,9 +32,15 @@ public class ItemsApiController extends BaseController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/api/items/{id}")
+    @PostMapping("/api/items/add-to-user/{id}")
     public void buyItem(@PathVariable long id, HttpSession session) {
         String username = getUsername(session);
-        itemsService.createForUserId(id, username);
+        itemsService.addToUserById(id, username);
+    }
+
+    @PostMapping("/api/items")
+    public void create(ItemCreateRequestModel requestModel) {
+        ItemCreateServiceModel serviceModel = modelMapper.map(requestModel, ItemCreateServiceModel.class);
+        itemsService.create(serviceModel);
     }
 }

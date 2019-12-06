@@ -1,8 +1,8 @@
 package softuni.heroes.services.services;
 
 import softuni.heroes.data.models.Hero;
-import softuni.heroes.services.models.HeroCreateServiceModel;
-import softuni.heroes.services.models.HeroDetailsServiceModel;
+import softuni.heroes.services.models.heroes.HeroCreateServiceModel;
+import softuni.heroes.services.models.heroes.HeroDetailsServiceModel;
 
 public interface HeroesService {
 
