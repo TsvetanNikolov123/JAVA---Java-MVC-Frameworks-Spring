@@ -7,7 +7,7 @@ import softuni.heroes.data.repositories.UsersRepository;
 import softuni.heroes.services.models.auth.LoginUserServiceModel;
 import softuni.heroes.services.models.auth.RegisterUserServiceModel;
 import softuni.heroes.services.services.AuthService;
-import softuni.heroes.services.services.AuthValidationService;
+import softuni.heroes.services.services.validation.AuthValidationService;
 import softuni.heroes.services.services.HashingService;
 
 @Service

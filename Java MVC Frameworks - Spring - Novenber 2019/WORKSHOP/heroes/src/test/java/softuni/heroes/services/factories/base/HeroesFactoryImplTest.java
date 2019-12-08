@@ -1,4 +1,4 @@
-package softuni.heroes.services.services.implementations;
+package softuni.heroes.services.factories.base;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

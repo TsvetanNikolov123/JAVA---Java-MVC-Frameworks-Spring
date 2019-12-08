@@ -10,6 +10,7 @@ import softuni.heroes.data.repositories.ItemsRepository;
 import softuni.heroes.services.models.items.ItemCreateServiceModel;
 import softuni.heroes.services.models.items.ItemServiceModel;
 import softuni.heroes.services.services.ItemsService;
+import softuni.heroes.services.services.validation.ItemsValidationService;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class ItemsServiceImpl implements ItemsService {
     private final ItemsRepository itemsRepository;
     private final HeroesRepository heroesRepository;
+    private final ItemsValidationService itemsValidationService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -66,6 +68,10 @@ public class ItemsServiceImpl implements ItemsService {
 
     @Override
     public void create(ItemCreateServiceModel serviceModel) {
+        if (!this.itemsValidationService.isValid(serviceModel)) {
+            throw new RuntimeException("Hero is invalid");
+        }
+
         Item item = modelMapper.map(serviceModel, Item.class);
         itemsRepository.save(item);
     }

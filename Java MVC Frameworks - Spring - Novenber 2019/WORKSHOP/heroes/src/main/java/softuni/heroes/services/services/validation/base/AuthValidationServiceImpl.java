@@ -1,9 +1,9 @@
-package softuni.heroes.services.services.implementations;
+package softuni.heroes.services.services.validation.base;
 
 import org.springframework.stereotype.Service;
 import softuni.heroes.data.repositories.UsersRepository;
 import softuni.heroes.services.models.auth.RegisterUserServiceModel;
-import softuni.heroes.services.services.AuthValidationService;
+import softuni.heroes.services.services.validation.AuthValidationService;
 
 @Service
 public class AuthValidationServiceImpl implements AuthValidationService {
