@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import softuni.heroes.data.models.Hero;
+import softuni.heroes.data.repositories.HeroesRepository;
 import softuni.heroes.services.models.auth.LoginUserServiceModel;
 import softuni.heroes.services.models.auth.RegisterUserServiceModel;
 import softuni.heroes.services.services.AuthService;
@@ -15,6 +17,7 @@ import softuni.heroes.web.view.models.RegisterUserModel;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -22,10 +25,12 @@ public class AuthController {
 
     private final AuthService authService;
     private final ModelMapper modelMapper;
+    private final HeroesRepository heroesRepository;
 
-    public AuthController(AuthService authService, ModelMapper modelMapper) {
+    public AuthController(AuthService authService, ModelMapper modelMapper, HeroesRepository heroesRepository) {
         this.authService = authService;
         this.modelMapper = modelMapper;
+        this.heroesRepository = heroesRepository;
     }
 
     @GetMapping("/login")
@@ -40,8 +45,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@Valid  @ModelAttribute RegisterUserModel model, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()){
+    public String register(@Valid @ModelAttribute RegisterUserModel model, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "auth/register.html";
         }
 
@@ -55,6 +60,9 @@ public class AuthController {
         RegisterUserServiceModel serviceModel = modelMapper.map(model, RegisterUserServiceModel.class);
         try {
             LoginUserServiceModel loginUserServiceModel = authService.login(serviceModel);
+            Optional<Hero> hero = heroesRepository
+                    .getByUserUsername(loginUserServiceModel.getUsername());
+            hero.ifPresent(value -> loginUserServiceModel.setHeroName(value.getName()));
             httpSession.setAttribute("user", loginUserServiceModel);
             return "redirect:/home";
         } catch (Exception e) {
