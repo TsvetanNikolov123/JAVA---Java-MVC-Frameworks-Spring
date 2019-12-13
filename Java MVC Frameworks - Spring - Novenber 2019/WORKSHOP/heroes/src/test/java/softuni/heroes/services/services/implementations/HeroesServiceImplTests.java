@@ -58,4 +58,13 @@ class HeroesServiceImplTests {
 
         assertEquals(hero.getName(), heroDetailsServiceModel.getName());
     }
+
+    @Test
+    void levelUp_whenHeroWon_shouldReturnCorrectLevel() {
+        Hero hero = new Hero();
+        hero.setName("Pesho");
+
+        heroesService.levelUp(hero);
+        assertEquals(hero.getLevel(), 1);
+    }
 }

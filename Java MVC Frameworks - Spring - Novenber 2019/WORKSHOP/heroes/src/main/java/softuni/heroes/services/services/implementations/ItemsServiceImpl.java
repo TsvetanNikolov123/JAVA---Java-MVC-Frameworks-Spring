@@ -50,18 +50,34 @@ public class ItemsServiceImpl implements ItemsService {
     @Override
     public void addToUserById(long id, String username) {
         Optional<Hero> heroResult = heroesRepository.getByUserUsername(username);
-        if (heroResult.isEmpty()){
+        if (heroResult.isEmpty()) {
             throw new NullPointerException("User does not have a hero");
         }
 
         Optional<Item> itemResult = itemsRepository.findById(id);
-        if (itemResult.isEmpty()){
+        if (itemResult.isEmpty()) {
             throw new NullPointerException("Item does not exists");
         }
 
         Hero hero = heroResult.get();
         Item item = itemResult.get();
-        hero.getItems().add(item);
+
+        // todo -> fix if we have already purchased given item and skip it
+        boolean hasItem = false;
+        for (Item currentItem : hero.getItems()) {
+            if (currentItem.getSlot() == item.getSlot()) {
+                hasItem = true;
+                break;
+            }
+        }
+
+        if (!hasItem) {
+            hero.getItems().add(item);
+            hero.setStrength(hero.getStrength() + item.getStrength());
+            hero.setStamina(hero.getStamina() + item.getStamina());
+            hero.setAttack(hero.getAttack() + item.getAttack());
+            hero.setDefence(hero.getDefence() + item.getDefence());
+        }
 
         heroesRepository.saveAndFlush(hero);
     }

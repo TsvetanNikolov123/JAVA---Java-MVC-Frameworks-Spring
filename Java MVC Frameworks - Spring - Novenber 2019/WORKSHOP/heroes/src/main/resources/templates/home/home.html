@@ -18,8 +18,16 @@
             <th:block th:unless="${session.user.heroName == null}">
                 <h2>User, already have a hero.</h2>
             </th:block>
+            <th:block th:if="${heroes.size() > 0}">
+                <div class="row flex-md-row" th:each="hero : ${heroes}">
+                    <div class="col text-center">
+                        <img th:src="@{'/img/' + ${hero.gender} + '.jpg'}" width="150">
+                        <h2 class="text-white" th:text="${hero.name}"></h2>
+                        <a class="btn btn-secondary" th:href="@{'/heroes/fight/' + ${hero.name}}">Fight</a>
+                    </div>
+                </div>
+            </th:block>
         </div>
-
     </div>
 </main>
 

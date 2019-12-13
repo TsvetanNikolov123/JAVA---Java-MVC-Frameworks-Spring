@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/heroes")
 public class HeroesController extends BaseController {
+
     private final HeroesService heroesService;
     private final ModelMapper modelMapper;
     private final UsersService usersService;
@@ -63,6 +64,20 @@ public class HeroesController extends BaseController {
         } catch (Exception ex) {
             return "redirect:/heroes/create";
         }
+    }
+
+    @GetMapping("/heroes/fight/{heroName}")
+    public ModelAndView fight(@PathVariable String heroName, ModelAndView modelAndView, HttpSession session) {
+        modelAndView.setViewName("heroes/fight");
+        HeroDetailsServiceModel currentHero = heroesService.getByName(getHeroName(session));
+        HeroDetailsServiceModel opponentHero = heroesService.getByName(heroName);
+
+        String winner = heroesService.getWinner(currentHero, opponentHero);
+
+        modelAndView.addObject("currentHero", currentHero);
+        modelAndView.addObject("opponent", opponentHero);
+        modelAndView.addObject("winner", winner);
+        return modelAndView;
     }
 
     @ExceptionHandler(HeroNotFoundException.class)
